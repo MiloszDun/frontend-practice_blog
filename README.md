@@ -1,10 +1,16 @@
+### Current Status
+Very early version: 
+- Simple frontend with basic styling.
+- Backend is only getting data from /articles/books, and is unable to handle server errors.
+- No filtering yet.
+
 ### What is it
 This is a simple blog app, to practice getting & displaying data from a mock API.
 
 It allows the user to...
-(1) See short versions of posts (with images, excerpts and dates)
-(2) Filter posts by category
-(3) Sort posts by date.
+- (1) See short versions of posts (with images, excerpts and dates)
+- (2) Filter posts by category
+- (3) Sort posts by date.
 
 The mock API is inside `server.js`. It's designed to occasionally misfire – frontend should be able to handle that.
 
