@@ -100,7 +100,7 @@ function requestHandler(req, res) {
             status = 404;
         }
     } else {
-        content = { message: 'Ooooops! this shouldn\'t be shown to clients probably...' };
+        content = { message: 'Internal Server Error' };
         status = 500;
     }
 
@@ -112,8 +112,8 @@ function requestHandler(req, res) {
 
 http.createServer(requestHandler).listen(PORT, err => {
     if (err) {
-        console.log('something bad happened', err);
+        console.log('Error: ', err);
         return;
     }
-    console.log(`server is listening on port: ${PORT}`);
+    console.log(`Server is listening on port: ${PORT}`);
 });
