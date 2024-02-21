@@ -1,7 +1,5 @@
 ### Current Status
-Early version: 
-- Simple frontend with basic styling.
-- No sorting yet.
+All functionalities work, but without frontend styling.
 
 ### What is it
 This is a simple blog app, to practice getting & displaying data from a mock API.
