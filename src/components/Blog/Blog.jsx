@@ -1,6 +1,12 @@
 import BlogPost from "../BlogPost/BlogPost"
+import { useContext } from "react"
+import { ArticlesContext } from "../../data/ArticlesContext"
 
-const Blog = ({articles}) => {
+const Blog = () => {
+  const { articles } = useContext(ArticlesContext);
+  console.log('This is articles:')
+  console.log(articles)
+
   return (
     <main className="content">
       <header className="header">
