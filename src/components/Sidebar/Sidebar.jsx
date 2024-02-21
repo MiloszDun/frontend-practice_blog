@@ -1,18 +1,9 @@
-import { useState } from "react";
+import { useContext } from "react"
+import { ArticlesContext } from "../../data/ArticlesContext"
 
 const Sidebar = () => {
 
-  const [isMusicChecked, setIsMusicChecked] = useState(true);
-  const [isBooksChecked, setIsBooksChecked] = useState(true);
-
-  // Event handlers to toggle the state
-  const toggleMusic = () => {
-    setIsMusicChecked(!isMusicChecked);
-  };
-
-  const toggleBooks = () => {
-    setIsBooksChecked(!isBooksChecked);
-  };
+  const {isMusicChecked, isBooksChecked, toggleBooks, toggleMusic} = useContext(ArticlesContext);
 
   return (
     <aside className="sidebar">
