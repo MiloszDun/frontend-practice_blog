@@ -7,6 +7,9 @@ export const ArticlesProvider = ({ children }) => {
   const [isMusicChecked, setIsMusicChecked] = useState(true);
   const [isBooksChecked, setIsBooksChecked] = useState(true);
   const [isSortedByDate, setIsSortedByDate] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
+
 
   // Function to toggle music checkbox
   const toggleMusic = () => {
@@ -26,6 +29,8 @@ export const ArticlesProvider = ({ children }) => {
   // Function to fetch posts data
   useEffect(() => {
     const fetchArticles = async () => {
+      setIsLoading(true);
+      setError('');
       let musicArticles = [];
       let booksArticles = [];
 
@@ -38,7 +43,9 @@ export const ArticlesProvider = ({ children }) => {
           const data = await response.json();
           musicArticles = data.articles;
         } catch(error) {
-          console.log(error);
+          setError(error.message)
+        } finally {
+          setIsLoading(false);
         }
       }
       if (isBooksChecked) {
@@ -50,7 +57,9 @@ export const ArticlesProvider = ({ children }) => {
           const data = await response.json();
           booksArticles = data.articles;
         } catch (error) {
-          console.log(error)
+          setError(error.message)
+        } finally {
+          setIsLoading(false)
         }
       }
 
@@ -68,7 +77,9 @@ export const ArticlesProvider = ({ children }) => {
       isBooksChecked,
       toggleBooks,
       isSortedByDate,
-      toggleSortByDate
+      toggleSortByDate,
+      error,
+      isLoading
     }}>
       {children}
     </ArticlesContext.Provider>

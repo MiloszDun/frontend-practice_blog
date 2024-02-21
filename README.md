@@ -1,8 +1,7 @@
 ### Current Status
-Very early version: 
+Early version: 
 - Simple frontend with basic styling.
-- Backend is only getting data from /articles/books, and is unable to handle server errors.
-- No filtering yet.
+- No sorting yet.
 
 ### What is it
 This is a simple blog app, to practice getting & displaying data from a mock API.
