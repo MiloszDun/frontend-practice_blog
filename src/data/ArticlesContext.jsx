@@ -4,29 +4,26 @@ export const ArticlesContext = createContext();
 
 export const ArticlesProvider = ({ children }) => {
   const [articles, setArticles] = useState([]);
+  const [sortedArticles, setSortedArticles] = useState([]);
   const [isMusicChecked, setIsMusicChecked] = useState(true);
   const [isBooksChecked, setIsBooksChecked] = useState(true);
-  const [isSortedByDate, setIsSortedByDate] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const [sortOrder, setSortOrder] = useState('newest'); // 'newest' or 'oldest'
 
-
-  // Function to toggle music checkbox
   const toggleMusic = () => {
     setIsMusicChecked(!isMusicChecked);
   };
 
-  // Function to toggle books checkbox
   const toggleBooks = () => {
     setIsBooksChecked(!isBooksChecked);
   };
 
-  // Function to toggle sorting by date
-  const toggleSortByDate = () => {
-    setIsSortedByDate(!isSortedByDate);
+  const toggleSortOrder = () => {
+    setSortOrder(prevSortOrder => (prevSortOrder === 'newest' ? 'oldest' : 'newest'));
   };
 
-  // Function to fetch posts data
+  // Fetching posts data
   useEffect(() => {
     const fetchArticles = async () => {
       setIsLoading(true);
@@ -67,19 +64,31 @@ export const ArticlesProvider = ({ children }) => {
     };
 
     fetchArticles();
-  }, [isMusicChecked, isBooksChecked, isSortedByDate])
+  }, [isMusicChecked, isBooksChecked])
+
+  // Sorting posts by date
+  useEffect(() => {
+    const sortArticles = () => {
+      return [...articles].sort((a,b) => {
+        const dateA = new Date(a.date);
+        const dateB = new Date(b.date);
+        return sortOrder === 'newest' ? dateB - dateA : dateA - dateB;
+      });
+    };
+    setSortedArticles(sortArticles(articles));
+  }, [articles, sortOrder])
 
   return (
     <ArticlesContext.Provider value={{
-      articles,
+      sortedArticles,
       isMusicChecked,
       toggleMusic,
       isBooksChecked,
       toggleBooks,
-      isSortedByDate,
-      toggleSortByDate,
       error,
-      isLoading
+      isLoading,
+      sortOrder,
+      toggleSortOrder
     }}>
       {children}
     </ArticlesContext.Provider>

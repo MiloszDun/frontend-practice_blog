@@ -3,7 +3,7 @@ import { useContext } from "react"
 import { ArticlesContext } from "../../data/ArticlesContext"
 
 const Blog = () => {
-  const { articles, isLoading, error } = useContext(ArticlesContext);
+  const { sortedArticles, isLoading, error } = useContext(ArticlesContext);
 
   return (
     <main className="content">
@@ -11,13 +11,13 @@ const Blog = () => {
         <h1>Blog</h1>
       </header>
       
-      {isLoading && <p>Loading...</p>}
+      {isLoading && <p>No posts found.</p>}
 
       {error && <p>Error: {error}. Please try refreshing the page. (Note: Mock API has a 10% chance of generating an error, to test error handling. Just reload the page.)</p>}
 
       {!isLoading && !error && 
         <section className="articles">
-          {articles.map(article => (
+          {sortedArticles.map(article => (
             <BlogPost key={article.id} article={article} />
           ))}
         </section>

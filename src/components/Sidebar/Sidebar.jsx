@@ -3,7 +3,7 @@ import { ArticlesContext } from "../../data/ArticlesContext"
 
 const Sidebar = () => {
 
-  const {isMusicChecked, isBooksChecked, toggleBooks, toggleMusic} = useContext(ArticlesContext);
+  const {isMusicChecked, isBooksChecked, toggleBooks, toggleMusic, sortOrder, toggleSortOrder} = useContext(ArticlesContext);
 
   return (
     <aside className="sidebar">
@@ -14,7 +14,9 @@ const Sidebar = () => {
       <label>
         <input type="checkbox" checked={isBooksChecked} onClick={toggleBooks} /> Books
       </label>
-      <button className="sort-button">Sort by date</button>
+      <button className="sort-button" onClick={toggleSortOrder}>
+        Sort by {sortOrder === 'newest' ? 'Oldest' : 'Newest'}
+      </button>
     </aside>
   )
 }
