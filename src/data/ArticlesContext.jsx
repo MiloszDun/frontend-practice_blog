@@ -11,11 +11,11 @@ export const ArticlesProvider = ({ children }) => {
   const [error, setError] = useState('');
   const [sortOrder, setSortOrder] = useState('newest'); // 'newest' or 'oldest'
 
-  const toggleMusic = () => {
+  const toggleMusic = (e) => {
     setIsMusicChecked(!isMusicChecked);
   };
 
-  const toggleBooks = () => {
+  const toggleBooks = (e) => {
     setIsBooksChecked(!isBooksChecked);
   };
 
@@ -41,8 +41,6 @@ export const ArticlesProvider = ({ children }) => {
           musicArticles = data.articles;
         } catch(error) {
           setError(error.message)
-        } finally {
-          setIsLoading(false);
         }
       }
       if (isBooksChecked) {
@@ -55,12 +53,11 @@ export const ArticlesProvider = ({ children }) => {
           booksArticles = data.articles;
         } catch (error) {
           setError(error.message)
-        } finally {
-          setIsLoading(false)
         }
       }
 
       setArticles([...musicArticles, ...booksArticles]);
+      setIsLoading(false)
     };
 
     fetchArticles();
